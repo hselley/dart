@@ -1,10 +1,11 @@
 import 'dart:math';
 void main() {
-  final raiz = secante(1,2,0.01,25);
+  // final raiz = secante(1,2,0.01,25);
+  final raiz = secante(1,2);
   print("La raíz de la función es: $raiz");
 }
 
-double secante(double p0, double p1, double TOL, int n0) {
+double secante(double p0, double p1, [double TOL=1e-2, int n0=50]) {
   int i=2;
   double q0=f(p0);
   double q1=f(p1);
