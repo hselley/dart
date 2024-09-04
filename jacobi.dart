@@ -9,7 +9,7 @@ void main() {
   ];
   final b = <double>[6, 25, -11, 15];
 
-  List<double> x = Jacobi(A, b, 1e-10);
+  List<double> x = Jacobi(A, b, 1e-6);
   print(x);
 }
 
@@ -30,7 +30,8 @@ List<double> Jacobi(List<List<double>> A, List<double> b, [double TOL=1e-2, int 
       }
       x[i] = 1 / A[i][i] * (-suma + b[i]);
     }
-    print(norma(restaV(x,x0)));
+    // print(norma(restaV(x,x0)));
+    print("$k: $x");
     if(norma(restaV(x,x0)) < TOL) {
       return x;
     }
