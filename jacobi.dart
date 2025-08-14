@@ -9,34 +9,35 @@ void main() {
   ];
   final b = <double>[6, 25, -11, 15];
 
-  List<double> x = Jacobi(A, b, 1e-6);
+  List<double> x = Jacobi(A, b, 1e-16);
   print(x);
 }
 
-List<double> Jacobi(List<List<double>> A, List<double> b, [double TOL=1e-2, int N0=50]) {
+List<double> Jacobi(List<List<double>> A, List<double> b,
+    [double TOL = 1e-2, int N0 = 50]) {
   int n = A.length; // Cantidad de incógnitas
   int k = 1;
   double suma = 0.0;
-  var x0 = List.filled(n, 0.0);   // Vector inicial
-  var x = List.filled(n, 0.0);    // Vector aproximación a solución
+  var x0 = List.filled(n, 0.0); // Vector inicial
+  var x = List.filled(n, 0.0); // Vector aproximación a solución
 
-  while(k<=N0) {
-    for(int i=0; i<n; i++) {
+  while (k <= N0) {
+    for (int i = 0; i < n; i++) {
       suma = 0.0;
-      for(int j=0; j<n; j++) {
-        if(j!=i) {
-          suma += A[i][j]*x0[j];
+      for (int j = 0; j < n; j++) {
+        if (j != i) {
+          suma += A[i][j] * x0[j];
         }
       }
       x[i] = 1 / A[i][i] * (-suma + b[i]);
     }
     // print(norma(restaV(x,x0)));
     print("$k: $x");
-    if(norma(restaV(x,x0)) < TOL) {
+    if (norma(restaV(x, x0)) < TOL) {
       return x;
     }
     k++;
-    x0 = [...x]; 
+    x0 = [...x];
     // Esto crea un clon de la lista, de no ser así se hace una
     // copia por referencia
   }
@@ -47,7 +48,7 @@ List<double> Jacobi(List<List<double>> A, List<double> b, [double TOL=1e-2, int 
 List<double> restaV(List<double> x, List<double> y) {
   var r = List.filled(x.length, 0.0);
 
-  for(int i=0; i<x.length; i++) {
+  for (int i = 0; i < x.length; i++) {
     r[i] = x[i] - y[i];
   }
 
@@ -57,8 +58,8 @@ List<double> restaV(List<double> x, List<double> y) {
 double norma(List<double> x) {
   double r = 0.0;
 
-  for(var i in x) {
-    r += pow(i,2);
+  for (var i in x) {
+    r += pow(i, 2);
   }
 
   // for-each
